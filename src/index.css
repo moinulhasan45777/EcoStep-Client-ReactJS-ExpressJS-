@@ -5,4 +5,19 @@
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
+  --color-base-100: #e7e7e7;
+  --color-base-200: #d8d8d8;
+  --color-base-300: #c4c4c4;
+  --color-primary: #8ebb2d;
+  --color-secondary: #262626;
+  --color-accent: #0a2d12;
+}
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
+.active {
+  border-bottom: 2px solid #8ebb2d;
+  color: #8ebb2d;
 }

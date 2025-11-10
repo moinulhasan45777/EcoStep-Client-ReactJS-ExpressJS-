@@ -51,7 +51,7 @@ const StyledWrapper = styled.div`
     width: 130%;
     left: -15%;
     transform: skew(30deg);
-    transition: transform 0.8s cubic-bezier(0.3, 1, 0.8, 1);
+    transition: transform 0.6s cubic-bezier(0.3, 1, 0.8, 1);
   }
 
   .cssbuttons-io:hover::before {

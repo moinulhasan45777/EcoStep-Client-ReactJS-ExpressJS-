@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import MainLayout from "../layouts/MainLayout";
 import Challenges from "../pages/Challenges";
 import MyActivites from "../pages/MyActivites";
+import Login from "../pages/Login";
 
 export const Router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export const Router = createBrowserRouter([
       {
         path: "/my-activites",
         Component: MyActivites,
+      },
+      {
+        path: "/login",
+        Component: Login,
       },
     ],
   },

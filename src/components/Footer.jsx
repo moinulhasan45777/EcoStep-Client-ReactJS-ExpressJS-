@@ -4,10 +4,10 @@ import { Link, Links } from "react-router";
 
 const Footer = () => {
   return (
-    <footer className="footer footer-horizontal footer-center bg-secondary text-[#b8b8b8] rounded p-10">
-      <a className="text-2xl font-bold flex gap-2 items-center mb-[-1rem]">
+    <footer className="footer footer-horizontal footer-center bg-secondary text-[#b8b8b8] p-10">
+      <a className="text-2xl font-bold flex gap-2 items-center -mb-4">
         <img src={logo} alt="Logo" className="w-10 h-10" />
-        <p className="text-primary">EcoTrack</p>
+        <p className="text-primary">EcoStep</p>
       </a>
       <nav className="grid grid-flow-col gap-4">
         <Link className="link link-hover hover:text-primary">About</Link>

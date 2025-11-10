@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../assets/logo.png";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import PrimaryButton from "./PrimaryButton";
 
 const links = () => {
@@ -84,7 +84,7 @@ const Navbar = () => {
         </div>
         <a className="text-2xl font-bold flex gap-2 items-center">
           <img src={logo} alt="Logo" className="w-10 h-10" />
-          <p className="text-primary">EcoTrack</p>
+          <p className="text-primary">EcoStep</p>
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -93,8 +93,12 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end gap-2">
-        <PrimaryButton st={"Register"}></PrimaryButton>
-        <PrimaryButton st={"Login"}></PrimaryButton>
+        <Link to="/register">
+          <PrimaryButton st={"Register"}></PrimaryButton>
+        </Link>
+        <Link to="/login">
+          <PrimaryButton st={"Login"}></PrimaryButton>
+        </Link>
       </div>
     </div>
   );

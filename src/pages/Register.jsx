@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
-import { Link } from "react-router";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
+import { Link } from "react-router";
+import useAuth from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
-const Login = () => {
+const Register = () => {
+  // Getting Authentication Properties
+  const { handleEmailRegistration, setUser, updateUser, setLoading } =
+    useAuth();
+
+  const [error, setError] = useState(null);
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [passwordType, setPasswordType] = useState("password");
 
@@ -17,11 +24,60 @@ const Login = () => {
     }
   };
 
+  //Handling Password Input Field Value Change
+  const handlePasswordChange = () => {
+    setError(null);
+  };
+
+  //Password Verification
+  const verifyPassword = (pass) => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).{6,}$/;
+    if (!passwordRegex.test(pass)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  // Handling Registration
+  const handleRegistration = (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const pass = e.target.password.value;
+    const url = e.target.url.value;
+    const email = e.target.email.value;
+
+    if (verifyPassword(pass)) {
+      setError(
+        "Password must have at least 1 uppercase, 1 lowercase, 1 special character, and at least 6 characters long"
+      );
+      return;
+    }
+
+    handleEmailRegistration(email, pass)
+      .then((result) => {
+        const user = result.user;
+        updateUser({ displayName: name, photoURL: url })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: url });
+            toast.success("Registration Successful!");
+          })
+          .catch((error) => {
+            setLoading(false);
+            toast.error(error.message);
+          });
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error(error.message);
+      });
+  };
+
   return (
     <div className="hero flex items-center justify-center min-h-[calc(100vh-72.594px)]">
       <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="card  min-w-md shrink-0 shadow-2xl">
-          <form className="card-body">
+        <div className="card  min-w-md max-w-md shrink-0 shadow-2xl">
+          <form onSubmit={handleRegistration} className="card-body">
             <fieldset className="fieldset">
               <div className="flex flex-col mb-8 gap-10 items-start">
                 <a className="text-2xl font-bold flex gap-2 items-center">
@@ -29,21 +85,42 @@ const Login = () => {
                   <p className="text-primary">EcoStep</p>
                 </a>
                 <h1 className="w-full text-center text-3xl font-bold">
-                  Login to EcoStep
+                  Join EcoStep
                 </h1>
               </div>
+              <label className="label">Name</label>
+              <input
+                type="text"
+                name="name"
+                className="input w-full focus:outline-none active:outline-none focus:border-2 focus:border-primary border-bg-200 font-medium placeholder:font-normal"
+                placeholder="John Michaels"
+                autoComplete="name"
+                required
+              />
               <label className="label">Email</label>
               <input
                 type="email"
+                name="email"
                 className="input w-full focus:outline-none active:outline-none focus:border-2 focus:border-primary border-bg-200 font-medium placeholder:font-normal"
-                placeholder="user@emaple.com"
+                placeholder="john.michaels@example.com"
                 autoComplete="username"
+                required
+              />
+              <label className="label">Photo URL</label>
+              <input
+                type="text"
+                name="url"
+                className="input w-full focus:outline-none active:outline-none focus:border-2 focus:border-primary border-bg-200 font-medium placeholder:font-normal"
+                placeholder="https://exmaple.com/image.jpg"
+                autoComplete="url"
+                required
               />
               <label className="label">Password</label>
               <div className="relative">
                 <input
                   type={passwordType}
                   name="password"
+                  onChange={handlePasswordChange}
                   className="input w-full focus:outline-none active:outline-none focus:border-2 focus:border-primary border-bg-200 font-medium placeholder:font-normal pr-10"
                   placeholder="**********"
                   autoComplete="current-password"
@@ -61,19 +138,12 @@ const Login = () => {
                   />
                 )}
               </div>
-              <div>
-                <Link
-                  to="/forgot-password"
-                  className=" hover:text-primary hover:underline"
-                >
-                  Forgot password?
-                </Link>
-              </div>
+              {error && <p className="text-xs text-red-400">{error}</p>}
               <button
                 type="submit"
                 className="btn btn-primary hover:bg-secondary border-none transition-all duration-300 ease-in-out mt-4 shadow-none"
               >
-                Login
+                Register
               </button>
             </fieldset>
             <div className="flex gap-2 items-center">
@@ -113,15 +183,15 @@ const Login = () => {
                   ></path>
                 </g>
               </svg>
-              Login with Google
+              Google Register
             </button>
             <p className="text-center mt-1">
-              Don't have an account?{" "}
+              Already have an account?{" "}
               <Link
-                to="/register"
+                to="/login"
                 className="font-bold text-primary hover:underline"
               >
-                Register
+                Login
               </Link>
             </p>
           </form>
@@ -131,4 +201,5 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
+Register;

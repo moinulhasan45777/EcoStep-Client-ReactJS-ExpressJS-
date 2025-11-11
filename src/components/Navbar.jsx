@@ -12,7 +12,7 @@ const links = () => {
           className="relative group hover:text-primary transition-colors duration-300 pb-1"
         >
           Home
-          <span class="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
+          <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
         </NavLink>
       </li>
       <li>
@@ -21,7 +21,7 @@ const links = () => {
           className="relative group hover:text-primary transition-colors duration-300  pb-1"
         >
           Challenges
-          <span class="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
+          <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
         </NavLink>
       </li>
       <li>
@@ -30,7 +30,7 @@ const links = () => {
           className="relative group hover:text-primary transition-colors duration-300  pb-1"
         >
           My Activites
-          <span class="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
+          <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
         </NavLink>
       </li>
     </>

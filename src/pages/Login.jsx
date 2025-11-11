@@ -3,8 +3,12 @@ import logo from "../assets/logo.png";
 import { Link } from "react-router";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
+import useAuth from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const { logIn, setLoading, setUser } = useAuth();
+
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [passwordType, setPasswordType] = useState("password");
 
@@ -17,11 +21,28 @@ const Login = () => {
     }
   };
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const pass = form.password.value;
+
+    logIn(email, pass)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setUser(user);
+        toast.success("Successfully Logged In!");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
   return (
     <div className="hero flex items-center justify-center min-h-[calc(100vh-72.594px)]">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="card  min-w-md shrink-0 shadow-2xl">
-          <form className="card-body">
+          <form onSubmit={handleLogin} className="card-body">
             <fieldset className="fieldset">
               <div className="flex flex-col mb-8 gap-10 items-start">
                 <a className="text-2xl font-bold flex gap-2 items-center">
@@ -35,6 +56,7 @@ const Login = () => {
               <label className="label">Email</label>
               <input
                 type="email"
+                name="email"
                 className="input w-full focus:outline-none active:outline-none focus:border-2 focus:border-primary border-bg-200 font-medium placeholder:font-normal"
                 placeholder="user@emaple.com"
                 autoComplete="username"

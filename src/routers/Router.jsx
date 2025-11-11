@@ -10,6 +10,8 @@ import MyProfile from "../pages/MyProfile.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import AddChallenges from "../pages/AddChallenges.jsx";
 import ForgotPassword from "../pages/ForgotPassword.jsx";
+import Challenge from "../pages/Challenge.jsx";
+import Error from "../pages/Error.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -23,6 +25,10 @@ export const Router = createBrowserRouter([
       {
         path: "/challenges",
         element: <Challenges></Challenges>,
+      },
+      {
+        path: "/challenges/:id",
+        element: <Challenge></Challenge>,
       },
       {
         path: "/challenges/add",
@@ -53,5 +59,9 @@ export const Router = createBrowserRouter([
         element: <MyProfile></MyProfile>,
       },
     ],
+  },
+  {
+    path: "/*",
+    element: <Error></Error>,
   },
 ]);

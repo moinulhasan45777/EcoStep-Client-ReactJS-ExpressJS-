@@ -9,6 +9,7 @@ import Register from "../pages/Register.jsx";
 import MyProfile from "../pages/MyProfile.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import AddChallenges from "../pages/AddChallenges.jsx";
+import ForgotPassword from "../pages/ForgotPassword.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const Router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword></ForgotPassword>,
       },
       {
         path: "/register",

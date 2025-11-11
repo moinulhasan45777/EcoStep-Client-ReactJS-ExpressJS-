@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   // Getting Authentication Properties
   const { handleEmailRegistration, setUser, updateUser, setLoading } =
     useAuth();
@@ -61,6 +63,7 @@ const Register = () => {
           .then(() => {
             setUser({ ...user, displayName: name, photoURL: url });
             toast.success("Registration Successful!");
+            navigate("/");
           })
           .catch((error) => {
             setLoading(false);

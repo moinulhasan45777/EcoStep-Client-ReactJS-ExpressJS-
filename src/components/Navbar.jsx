@@ -4,6 +4,7 @@ import { Link, NavLink, useNavigate } from "react-router";
 import PrimaryButton from "./PrimaryButton";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
+import avatar from "../assets/avatar.jpg";
 
 const Navbar = () => {
   const links = () => {
@@ -115,8 +116,11 @@ const Navbar = () => {
               tabIndex={0}
               role="button"
               src={user.photoURL}
+              onError={(e) => {
+                e.target.src = avatar;
+              }}
               alt="Profile Picture"
-              className="h-15 w-15 rounded-full border-3 border-primary cursor-pointer"
+              className="h-15 w-15 rounded-full border-4 border-primary cursor-pointer"
             />
             <ul
               tabIndex="-1"

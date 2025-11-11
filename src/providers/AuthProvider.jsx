@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   updateProfile,
+  signOut,
 } from "firebase/auth";
 import app from "../firebase/firebase.init";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -35,6 +36,11 @@ const AuthProvider = ({ children }) => {
     return updateProfile(auth.currentUser, updateData);
   };
 
+  //   Signing Out
+  const logOut = () => {
+    return signOut(auth);
+  };
+
   const authData = {
     user,
     setUser,
@@ -42,6 +48,7 @@ const AuthProvider = ({ children }) => {
     setLoading,
     handleEmailRegistration,
     updateUser,
+    logOut,
   };
 
   if (loading) {

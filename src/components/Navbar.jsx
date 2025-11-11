@@ -1,43 +1,59 @@
 import React from "react";
 import logo from "../assets/logo.png";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import PrimaryButton from "./PrimaryButton";
-
-const links = () => {
-  return (
-    <>
-      <li>
-        <NavLink
-          to="/"
-          className="relative group hover:text-primary transition-colors duration-300 pb-1"
-        >
-          Home
-          <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/challenges"
-          className="relative group hover:text-primary transition-colors duration-300  pb-1"
-        >
-          Challenges
-          <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/my-activites"
-          className="relative group hover:text-primary transition-colors duration-300  pb-1"
-        >
-          My Activites
-          <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
-        </NavLink>
-      </li>
-    </>
-  );
-};
+import useAuth from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const links = () => {
+    return (
+      <>
+        <li>
+          <NavLink
+            to="/"
+            className="relative group hover:text-primary transition-colors duration-300 pb-1"
+          >
+            Home
+            <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/challenges"
+            className="relative group hover:text-primary transition-colors duration-300  pb-1"
+          >
+            Challenges
+            <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/my-activites"
+            className="relative group hover:text-primary transition-colors duration-300  pb-1"
+          >
+            My Activites
+            <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
+          </NavLink>
+        </li>
+      </>
+    );
+  };
+
+  const { user, logOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        navigate("/");
+        toast.success("Signed Out Successfully!");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
   return (
     <div className="navbar shadow-sm px-10 py-3">
       <div className="navbar-start">
@@ -92,14 +108,57 @@ const Navbar = () => {
           {links()}
         </ul>
       </div>
-      <div className="navbar-end gap-2">
-        <Link to="/register">
-          <PrimaryButton st={"Register"}></PrimaryButton>
-        </Link>
-        <Link to="/login">
-          <PrimaryButton st={"Login"}></PrimaryButton>
-        </Link>
-      </div>
+      {user ? (
+        <div className="navbar-end gap-2">
+          <div className="dropdown dropdown-end">
+            <img
+              tabIndex={0}
+              role="button"
+              src={user.photoURL}
+              alt="Profile Picture"
+              className="h-15 w-15 rounded-full border-3 border-primary cursor-pointer"
+            />
+            <ul
+              tabIndex="-1"
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              <li>
+                <NavLink
+                  to="/my-profile"
+                  className="relative group transition-colors duration-300 pb-1 rounded-none"
+                >
+                  Profile
+                  <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full "></span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/my-activites"
+                  className="relative group transition-colors duration-300  pb-1 rounded-none"
+                >
+                  My Activities
+                  <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
+                </NavLink>
+              </li>
+              <li onClick={handleLogOut}>
+                <Link className="relative group transition-colors duration-300  pb-1 rounded-none">
+                  Logout
+                  <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <div className="navbar-end gap-2">
+          <Link to="/register">
+            <PrimaryButton st={"Register"}></PrimaryButton>
+          </Link>
+          <Link to="/login">
+            <PrimaryButton st={"Login"}></PrimaryButton>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

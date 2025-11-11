@@ -6,6 +6,7 @@ import Challenges from "../pages/Challenges";
 import MyActivites from "../pages/MyActivites";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import MyProfile from "../pages/MyProfile";
 
 export const Router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const Router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+      {
+        path: "/my-profile",
+        Component: MyProfile,
       },
     ],
   },

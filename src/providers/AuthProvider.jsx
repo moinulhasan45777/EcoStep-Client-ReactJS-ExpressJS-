@@ -6,6 +6,8 @@ import {
   updateProfile,
   signOut,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import app from "../firebase/firebase.init";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -44,6 +46,13 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  // Google SignIn
+  const googleProvider = new GoogleAuthProvider();
+  const googleSignIn = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
+
   //   Signing Out
   const logOut = () => {
     return signOut(auth);
@@ -58,6 +67,7 @@ const AuthProvider = ({ children }) => {
     updateUser,
     logOut,
     logIn,
+    googleSignIn,
   };
 
   if (loading) {

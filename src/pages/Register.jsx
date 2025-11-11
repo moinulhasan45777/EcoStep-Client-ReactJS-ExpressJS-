@@ -2,16 +2,24 @@ import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
-import { Link, useNavigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 
 const Register = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Getting Authentication Properties
-  const { handleEmailRegistration, setUser, updateUser, setLoading } =
-    useAuth();
+  const {
+    handleEmailRegistration,
+    setUser,
+    updateUser,
+    setLoading,
+    user,
+    loading,
+    googleSignIn,
+  } = useAuth();
 
   const [error, setError] = useState(null);
   const [passwordVisible, setPasswordVisible] = useState(true);
@@ -63,7 +71,7 @@ const Register = () => {
           .then(() => {
             setUser({ ...user, displayName: name, photoURL: url });
             toast.success("Registration Successful!");
-            navigate("/");
+            navigate(`/`);
           })
           .catch((error) => {
             setLoading(false);
@@ -75,6 +83,33 @@ const Register = () => {
         toast.error(error.message);
       });
   };
+
+  // Google Login
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setUser(user);
+        navigate(`/`);
+        setTimeout(() => {
+          toast.success("Registration Successful");
+        }, 10);
+      })
+      .catch((error) => {
+        setTimeout(() => {
+          toast.error(error.message);
+        }, 10);
+        setLoading(false);
+      });
+  };
+
+  if (loading) {
+    return <Loading></Loading>;
+  }
+
+  if (user && !location.state) {
+    return <Navigate to="/"></Navigate>;
+  }
 
   return (
     <div className="hero flex items-center justify-center min-h-[calc(100vh-72.594px)]">
@@ -156,6 +191,7 @@ const Register = () => {
             </div>
 
             <button
+              onClick={handleGoogleLogin}
               type="button"
               className="btn bg-secondary border-accent text-base-300 hover:bg-base-100 hover:border duration-300 transition-all ease-in-out hover:text-black"
             >

@@ -120,7 +120,7 @@ const Navbar = () => {
                 e.target.src = avatar;
               }}
               alt="Profile Picture"
-              className="h-15 w-15 rounded-full border-4 border-primary cursor-pointer"
+              className="h-15 w-15 rounded-full border-4 border-primary cursor-pointer transition-all duration-300 ease-in-out hover:shadow-lg focus:shadow-lg hover:scale-110 focus:scale-110"
             />
             <ul
               tabIndex="-1"

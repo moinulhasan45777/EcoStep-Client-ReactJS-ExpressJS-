@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
-import { Link } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const { logIn, loading, setUser, setLoading } = useAuth();
-
+  const { logIn, loading, setUser, setLoading, googleSignIn, user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [passwordType, setPasswordType] = useState("password");
 
@@ -21,6 +22,7 @@ const Login = () => {
     }
   };
 
+  // Email & Password Login
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -31,6 +33,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setUser(user);
+        navigate(`${location.state ? location.state : "/"}`);
         setTimeout(() => {
           toast.success("Successfully Logged In!");
         }, 10);
@@ -42,8 +45,32 @@ const Login = () => {
         setLoading(false);
       });
   };
+
+  // Google Login
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setUser(user);
+        navigate(`${location.state ? location.state : "/"}`);
+        setTimeout(() => {
+          toast.success("Successfully Logged In!");
+        }, 10);
+      })
+      .catch((error) => {
+        setTimeout(() => {
+          toast.error(error.message);
+        }, 10);
+        setLoading(false);
+      });
+  };
+
   if (loading) {
     return <Loading></Loading>;
+  }
+
+  if (user && !location.state) {
+    return <Navigate to="/"></Navigate>;
   }
   return (
     <div className="hero flex items-center justify-center min-h-[calc(100vh-72.594px)]">
@@ -112,6 +139,7 @@ const Login = () => {
             </div>
 
             <button
+              onClick={handleGoogleLogin}
               type="button"
               className="btn bg-secondary border-accent text-base-300 hover:bg-base-100 hover:border duration-300 transition-all ease-in-out hover:text-black"
             >

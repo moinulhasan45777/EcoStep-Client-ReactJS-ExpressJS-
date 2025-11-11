@@ -1,41 +1,51 @@
 import React from "react";
 import { createBrowserRouter } from "react-router";
-import Home from "../pages/Home";
-import MainLayout from "../layouts/MainLayout";
-import Challenges from "../pages/Challenges";
-import MyActivites from "../pages/MyActivites";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import MyProfile from "../pages/MyProfile";
+import Home from "../pages/Home.jsx";
+import MainLayout from "../layouts/MainLayout.jsx";
+import Challenges from "../pages/Challenges.jsx";
+import MyActivites from "../pages/MyActivites.jsx";
+import Login from "../pages/Login.jsx";
+import Register from "../pages/Register.jsx";
+import MyProfile from "../pages/MyProfile.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
+import AddChallenges from "../pages/AddChallenges.jsx";
 
 export const Router = createBrowserRouter([
   {
     path: "/",
-    Component: MainLayout,
+    element: <MainLayout></MainLayout>,
     children: [
       {
         path: "/",
-        Component: Home,
+        element: <Home></Home>,
       },
       {
         path: "/challenges",
-        Component: Challenges,
+        element: <Challenges></Challenges>,
+      },
+      {
+        path: "/challenges/add",
+        element: (
+          <PrivateRoute>
+            <AddChallenges></AddChallenges>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-activites",
-        Component: MyActivites,
+        element: <MyActivites></MyActivites>,
       },
       {
         path: "/login",
-        Component: Login,
+        element: <Login></Login>,
       },
       {
         path: "/register",
-        Component: Register,
+        element: <Register></Register>,
       },
       {
         path: "/my-profile",
-        Component: MyProfile,
+        element: <MyProfile></MyProfile>,
       },
     ],
   },

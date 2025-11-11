@@ -7,7 +7,7 @@ import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const { logIn, setLoading, setUser } = useAuth();
+  const { logIn, loading, setUser, setLoading } = useAuth();
 
   const [passwordVisible, setPasswordVisible] = useState(true);
   const [passwordType, setPasswordType] = useState("password");
@@ -31,13 +31,20 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setUser(user);
-        toast.success("Successfully Logged In!");
+        setTimeout(() => {
+          toast.success("Successfully Logged In!");
+        }, 10);
       })
       .catch((error) => {
-        toast.error(error.message);
+        setTimeout(() => {
+          toast.error(error.message);
+        }, 10);
+        setLoading(false);
       });
   };
-
+  if (loading) {
+    return <Loading></Loading>;
+  }
   return (
     <div className="hero flex items-center justify-center min-h-[calc(100vh-72.594px)]">
       <div className="hero-content flex-col lg:flex-row-reverse">

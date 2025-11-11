@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
   console.log(loading);
   //   Registration
   const handleEmailRegistration = (email, pass) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, pass);
   };
 
@@ -39,6 +40,7 @@ const AuthProvider = ({ children }) => {
 
   // SignIn
   const logIn = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 

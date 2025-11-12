@@ -20,9 +20,12 @@ const UpcomingEvents = () => {
         Upcoming Events
       </h2>
       <div className="grid grid-cols-4 justify-center w-7/10 mx-auto gap-6">
-        {upcomingEvents.map((oneEvent) => (
-          <EventCard key={oneEvent._id} oneEvent={oneEvent}></EventCard>
-        ))}
+        {upcomingEvents
+          .filter((oneEvent) => new Date(oneEvent.date) > new Date())
+          .slice(0, 4)
+          .map((oneEvent) => (
+            <EventCard key={oneEvent._id} oneEvent={oneEvent}></EventCard>
+          ))}
       </div>
     </section>
   );

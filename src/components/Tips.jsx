@@ -24,7 +24,7 @@ const Tips = () => {
         Recent Tips
       </h2>
       <div className="grid grid-cols-5 w-7/10 justify-center mx-auto gap-4">
-        {allTips.map((tip) => (
+        {allTips.slice(0, 5).map((tip) => (
           <Tip key={tip._id} tip={tip}></Tip>
         ))}
       </div>

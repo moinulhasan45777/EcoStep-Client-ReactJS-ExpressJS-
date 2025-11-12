@@ -16,9 +16,7 @@ const Tips = () => {
     };
 
     fetchTips();
-  }, []); // run once on mount
-
-  console.log(allTips); // log after data fetched
+  }, []);
 
   return (
     <div className="mb-20">

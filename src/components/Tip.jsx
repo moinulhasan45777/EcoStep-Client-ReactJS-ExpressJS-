@@ -71,7 +71,7 @@ const Tip = ({ tip }) => {
         <button
           disabled={upvoteCount > tip.upvotes}
           onClick={handleUpvote}
-          className={`text-sm px-3 py-1.5 rounded-lg bg-primary text-white hover:bg-secondary cursor-pointer transition disabled:cursor-not-allowed disabled:bg-secondary `}
+          className={`text-sm px-3 py-1.5 rounded-lg bg-primary text-white hover:bg-secondary cursor-pointer transition disabled:cursor-auto disabled:bg-secondary `}
         >
           Upvote
         </button>

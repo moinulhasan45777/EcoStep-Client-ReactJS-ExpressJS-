@@ -19,7 +19,7 @@ const Tips = () => {
   }, []);
 
   return (
-    <div className="mb-20">
+    <section className="mb-20">
       <h2 className="text-4xl  font-bold text-secondary mb-10 text-center">
         Recent Tips
       </h2>
@@ -28,7 +28,7 @@ const Tips = () => {
           <Tip key={tip._id} tip={tip}></Tip>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

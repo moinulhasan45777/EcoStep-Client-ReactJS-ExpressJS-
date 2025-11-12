@@ -3,7 +3,7 @@ import ChallengeCard from "./ChallengeCard";
 
 const ActiveChallenges = ({ allChallenges }) => {
   return (
-    <div className="mb-20">
+    <section className="mb-20">
       <h2 className="text-4xl  font-bold text-secondary mb-10 text-center">
         Active Challenges
       </h2>
@@ -19,7 +19,7 @@ const ActiveChallenges = ({ allChallenges }) => {
             );
           })}
       </div>
-    </div>
+    </section>
   );
 };
 

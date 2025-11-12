@@ -12,7 +12,7 @@ import "swiper/css";
 import PrimaryButton from "../components/PrimaryButton";
 const Banner = ({ allChallenges }) => {
   return (
-    <div className="mb-20">
+    <header className="mb-20">
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
@@ -40,7 +40,7 @@ const Banner = ({ allChallenges }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </header>
   );
 };
 

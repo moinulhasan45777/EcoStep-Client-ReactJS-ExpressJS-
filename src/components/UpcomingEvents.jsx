@@ -15,7 +15,7 @@ const UpcomingEvents = () => {
   }, []);
 
   return (
-    <div className="mb-20">
+    <section className="mb-20">
       <h2 className="text-4xl  font-bold text-secondary mb-10 text-center">
         Upcoming Events
       </h2>
@@ -24,7 +24,7 @@ const UpcomingEvents = () => {
           <EventCard key={oneEvent._id} oneEvent={oneEvent}></EventCard>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

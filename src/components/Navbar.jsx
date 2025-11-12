@@ -56,7 +56,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar shadow-sm px-10 py-3">
+    <nav className="navbar shadow-sm px-10 py-3">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -147,7 +147,7 @@ const Navbar = () => {
           </Link>
         </div>
       )}
-    </div>
+    </nav>
   );
 };
 

@@ -18,9 +18,9 @@ const ChallengeCard = ({ challenge }) => {
         <p className="text-sm text-gray-500 font-medium">
           {challenge.category}
         </p>
-        <h2 className="text-xl font-semibold text-gray-800 mt-1">
+        <h3 className="text-xl font-semibold text-gray-800 mt-1">
           {challenge.title}
-        </h2>
+        </h3>
         <p className="text-gray-600 text-sm mt-2 leading-relaxed mb-4 grow">
           {challenge.description}
         </p>

@@ -33,3 +33,24 @@ body,
 html {
   overflow: visible !important;
 }
+
+/* Swiper Carousel */
+.mySwiper .swiper-button-next,
+.mySwiper .swiper-button-prev {
+  color: #262626;
+  transition: all 0.3s ease-in-out;
+}
+.mySwiper .swiper-button-next:hover,
+.mySwiper .swiper-button-prev:hover {
+  color: #8ebb2d;
+}
+/* All dots */
+.mySwiper .swiper-pagination-bullet {
+  background-color: #262626;
+  opacity: 1;
+}
+
+/* Active dot */
+.mySwiper .swiper-pagination-bullet-active {
+  background-color: #8ebb2d;
+}

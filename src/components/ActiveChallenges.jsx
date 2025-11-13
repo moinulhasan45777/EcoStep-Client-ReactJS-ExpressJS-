@@ -9,7 +9,7 @@ const ActiveChallenges = ({ allChallenges }) => {
       </h2>
       <div className="grid grid-cols-3 justify-center w-7/10 mx-auto gap-6">
         {allChallenges
-          .filter((challenge) => new Date() < new Date(challenge.endDate))
+          .filter((challenge) => new Date() <= new Date(challenge.endDate))
           .map((challenge) => {
             return (
               <ChallengeCard

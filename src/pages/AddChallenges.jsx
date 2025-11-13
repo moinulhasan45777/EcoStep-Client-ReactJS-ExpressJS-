@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
 import { toast } from "react-toastify";
+import useTitle from "../hooks/useTitle";
 
 const AddChallenges = () => {
+  useTitle("Create Challenge");
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [startDateError, setStartDateError] = useState("");

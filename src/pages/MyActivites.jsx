@@ -4,8 +4,10 @@ import useAuth from "../hooks/useAuth";
 import MyChallenges from "../components/MyChallenges";
 import { toast } from "react-toastify";
 import MyJoinedChallenges from "../components/MyJoinedChallenges";
+import useTitle from "../hooks/useTitle";
 
 const MyActivites = () => {
+  useTitle("My Activities");
   const { user } = useAuth();
   const allChallenges = useLoaderData();
   const [loading, setLoading] = useState(false);

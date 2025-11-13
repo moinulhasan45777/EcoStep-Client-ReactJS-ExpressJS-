@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import ChallengeCard from "../components/ChallengeCard";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import useTitle from "../hooks/useTitle";
 
 const Challenges = () => {
+  useTitle("Challenges");
   const [allChallenges, setAllChallenges] = useState([]);
   const [category, setCategory] = useState("");
   const [start, setStart] = useState("");

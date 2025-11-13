@@ -3,8 +3,10 @@ import useAuth from "../hooks/useAuth";
 
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router";
+import useTitle from "../hooks/useTitle";
 
 const UpdateChallenge = () => {
+  useTitle("Update Challenge");
   const navigate = useNavigate();
   const location = useLocation();
   const challenge = location.state;

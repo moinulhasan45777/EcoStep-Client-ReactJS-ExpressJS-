@@ -7,8 +7,10 @@ import Tips from "../components/Tips";
 import UpcomingEvents from "../components/UpcomingEvents";
 import WhyGoGreen from "../components/WhyGoGreen";
 import HowItWorks from "../components/HowItWorks";
+import useTitle from "../hooks/useTitle";
 
 const Home = () => {
+  useTitle("Home");
   const allChallenges = useLoaderData();
   return (
     <div>

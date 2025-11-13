@@ -3,8 +3,10 @@ import { useLocation, useParams, useNavigate } from "react-router";
 import useAxios from "../hooks/useAxios";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
+import useTitle from "../hooks/useTitle";
 
 const JoinChallenge = () => {
+  useTitle("Join Challenge");
   const [challenge, setChallenge] = useState(null);
   const [joined, setJoined] = useState(false);
   const [loading, setLoading] = useState(true);

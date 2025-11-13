@@ -5,8 +5,10 @@ import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
+import useTitle from "../hooks/useTitle";
 
 const Login = () => {
+  useTitle("Login");
   const { logIn, loading, setUser, setLoading, googleSignIn, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();

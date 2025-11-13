@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
+import useTitle from "../hooks/useTitle";
 
 const JoinedChallengePage = () => {
+  useTitle("Joined Challenges");
   const { user } = useAuth();
   const [challenge, setChallenge] = useState(null);
   const [userChallenges, setUserChallenges] = useState([]);

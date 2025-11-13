@@ -2,8 +2,10 @@ import React from "react";
 import logo from "../assets/logo.png";
 import useAuth from "../hooks/useAuth";
 import { Navigate } from "react-router";
+import useTitle from "../hooks/useTitle";
 
 const ForgotPassword = () => {
+  useTitle("Forgot Password");
   const { loading, user } = useAuth();
   if (loading) {
     return <Loading></Loading>;

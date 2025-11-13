@@ -1,7 +1,9 @@
 import React from "react";
 import { isRouteErrorResponse, useNavigate } from "react-router";
+import useTitle from "../hooks/useTitle";
 
 const RuntimeError = ({ error }) => {
+  useTitle("Oops Error");
   const navigate = useNavigate();
 
   let message = "Something went wrong!";

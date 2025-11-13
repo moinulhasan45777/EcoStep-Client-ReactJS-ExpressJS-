@@ -1,6 +1,8 @@
 import React from "react";
+import useTitle from "../hooks/useTitle";
 
 const Error = () => {
+  useTitle("404-Error");
   return (
     <div className="flex flex-col h-screen justify-center items-center">
       <svg

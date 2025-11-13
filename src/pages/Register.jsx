@@ -5,8 +5,10 @@ import { IoMdEyeOff } from "react-icons/io";
 import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
+import useTitle from "../hooks/useTitle";
 
 const Register = () => {
+  useTitle("Join EcoStep");
   const navigate = useNavigate();
   const location = useLocation();
 

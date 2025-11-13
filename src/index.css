@@ -55,3 +55,23 @@ html {
 .mySwiper .swiper-pagination-bullet-active {
   background-color: #8ebb2d;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+.icon {
+  color: #b8b8b8; /* default color */
+  transition: color 0.1s; /* smooth hover */
+}
+
+.icon:hover {
+  color: #8ebb2d; /* color on hover */
+}

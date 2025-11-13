@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import MyJoinedChallengeCard from "./MyJoinedChallengeCard";
+import { toast } from "react-toastify";
 
 const MyJoinedChallenges = () => {
   const { user } = useAuth();
@@ -28,6 +29,9 @@ const MyJoinedChallenges = () => {
                 )
               );
               setLoading(false);
+            })
+            .catch((error) => {
+              toast.error(error.message);
             });
         });
     };
@@ -39,11 +43,11 @@ const MyJoinedChallenges = () => {
         My Joined Challenges
       </h2>
       {loading ? (
-        <div className="w-7/10 mx-auto flex justify-center">
+        <div className="w-9/10 md:w-8/10 lg:w-7/10 mx-auto flex justify-center">
           <span className="loading loading-spinner loading-xl"></span>
         </div>
       ) : (
-        <div className="grid grid-cols-3 justify-center w-7/10 mx-auto gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 justify-center w-9/10 md:w-8/10 lg:w-7/10 mx-auto gap-6">
           {challenges.map((challenge) => (
             <MyJoinedChallengeCard
               key={challenge._id}

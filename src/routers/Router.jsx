@@ -15,6 +15,8 @@ import Error from "../pages/Error.jsx";
 import JoinChallenge from "../pages/JoinChallenge.jsx";
 import UpdateChallenge from "../pages/UpdateChallenge.jsx";
 import JoinedChallengePage from "../pages/JoinedChallengePage.jsx";
+import LoadingSpinner from "../components/LoadingSpinner.jsx";
+import RuntimeError from "../pages/RuntimeError.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -23,7 +25,9 @@ export const Router = createBrowserRouter([
     children: [
       {
         path: "/",
+        ErrorBoundary: RuntimeError,
         element: <Home></Home>,
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
         loader: () =>
           fetch("http://localhost:3000/challenges").then((res) => res.json()),
       },
@@ -52,7 +56,7 @@ export const Router = createBrowserRouter([
         ),
       },
       {
-        path: "/my-activites/challenges/update/:id",
+        path: "/my-activities/challenges/update/:id",
         element: (
           <PrivateRoute>
             <UpdateChallenge></UpdateChallenge>
@@ -60,7 +64,7 @@ export const Router = createBrowserRouter([
         ),
       },
       {
-        path: "/my-activites",
+        path: "/my-activities",
         element: (
           <PrivateRoute>
             <MyActivites></MyActivites>
@@ -68,6 +72,7 @@ export const Router = createBrowserRouter([
         ),
         loader: () =>
           fetch("http://localhost:3000/challenges").then((res) => res.json()),
+        hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {
         path: "/my-activities/:id",
@@ -91,7 +96,11 @@ export const Router = createBrowserRouter([
       },
       {
         path: "/my-profile",
-        element: <MyProfile></MyProfile>,
+        element: (
+          <PrivateRoute>
+            <MyProfile></MyProfile>
+          </PrivateRoute>
+        ),
       },
     ],
   },

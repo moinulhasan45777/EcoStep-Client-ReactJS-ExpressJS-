@@ -39,7 +39,11 @@ const ChallengeCard = ({ challenge }) => {
         {/* Impact Metric + Button */}
         <div className="mt-auto flex items-center justify-between border-t border-gray-100 pt-4">
           <span className="text-sm font-medium flex mr-2 gap-1">
-            <span>🌱</span> <span>Impact: {challenge.impactMetric}</span>
+            <span>🌱</span>{" "}
+            <span>
+              Impact: {challenge.target}
+              {challenge.impactMetric}
+            </span>
           </span>
           <button
             onClick={handleClick}

@@ -65,10 +65,6 @@ const Login = () => {
       });
   };
 
-  if (loading) {
-    return <Loading></Loading>;
-  }
-
   if (user && !location.state) {
     return <Navigate to="/"></Navigate>;
   }
@@ -126,8 +122,9 @@ const Login = () => {
                 </Link>
               </div>
               <button
+                disabled={loading}
                 type="submit"
-                className="btn btn-primary hover:bg-secondary border-none transition-all duration-300 ease-in-out mt-4 shadow-none"
+                className="btn btn-primary disabled:btn-secondary disabled:cursor-auto hover:bg-secondary border-none transition-all duration-300 ease-in-out mt-4 shadow-none"
               >
                 Login
               </button>
@@ -139,9 +136,10 @@ const Login = () => {
             </div>
 
             <button
+              disabled={loading}
               onClick={handleGoogleLogin}
               type="button"
-              className="btn bg-secondary border-accent text-base-300 hover:bg-base-100 hover:border duration-300 transition-all ease-in-out hover:text-black"
+              className="disabled:bg-gray-400 disabled:cursor-auto btn bg-secondary border-accent text-base-300 hover:bg-base-100 hover:border duration-300 transition-all ease-in-out hover:text-black"
             >
               <svg
                 aria-label="Google logo"

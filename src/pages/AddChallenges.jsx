@@ -7,8 +7,11 @@ const AddChallenges = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [startDateError, setStartDateError] = useState("");
+  const [targetError, setTargetError] = useState("");
+  const [durationError, setDurationError] = useState("");
   const [endDateError, setEndDateError] = useState("");
   const axiosInstance = useAxios();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -16,12 +19,22 @@ const AddChallenges = () => {
     const title = form.title.value;
     const category = form.category.value;
     const duration = form.duration.value;
+    if (duration < 1) {
+      setDurationError("Please! Choose a valid Duration.");
+      return;
+    }
     const target = form.target.value;
+    if (target < 1) {
+      setTargetError("Please! Choose a valid Target.");
+      return;
+    }
     const description = form.description.value;
     const imageUrl = form.imageUrl.value;
     const impactMetric = form.impactMetric.value;
     const startDate = form.startDate.value.toString().slice(0, 10);
     const endDate = form.endDate.value.toString().slice(0, 10);
+    const createdAt = new Date().toISOString().slice(0, 10);
+    const updatedAt = new Date().toISOString().slice(0, 10);
 
     const newChallenge = {
       title,
@@ -35,6 +48,8 @@ const AddChallenges = () => {
       startDate,
       endDate,
       imageUrl,
+      createdAt,
+      updatedAt,
     };
 
     if (
@@ -59,6 +74,7 @@ const AddChallenges = () => {
       setLoading(false);
     });
   };
+
   return (
     <section className="w-full min-h-screen bg-gray-50 py-16">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-10 border border-gray-100">
@@ -111,22 +127,30 @@ const AddChallenges = () => {
             <input
               type="number"
               name="duration"
+              onFocus={() => setDurationError("")}
               placeholder="e.g. 21"
               className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
+            {durationError && (
+              <p className="text-sm mt-1 text-red-500 mb-1">{durationError}</p>
+            )}
           </div>
 
           {/* Target */}
           <div className="sm:col-span-2">
             <label className="text-sm text-gray-600 mb-1 block">Target</label>
             <input
-              type="text"
+              type="number"
+              onFocus={() => setTargetError("")}
               name="target"
-              placeholder="e.g. Reduce daily water waste"
+              placeholder="e.g. 40"
               className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
+            {targetError && (
+              <p className="text-sm mt-1 text-red-500 mb-1">{targetError}</p>
+            )}
           </div>
 
           {/* Description */}
@@ -157,18 +181,22 @@ const AddChallenges = () => {
             />
           </div>
 
-          {/* Impact Metric */}
+          {/* Impact Metric (SELECT) */}
           <div>
             <label className="text-sm text-gray-600 mb-1 block">
               Impact Metric
             </label>
-            <input
-              type="text"
+            <select
               name="impactMetric"
-              placeholder="e.g. liters saved"
               className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
-            />
+            >
+              <option value="">Select Impact Metric</option>
+              <option value="kg CO2 saved">kg CO₂ Saved</option>
+              <option value="kg plastic saved">kg Plastic Saved</option>
+              <option value="kWh saved">kWh Saved</option>
+              <option value="liter saved">Liter Saved</option>
+            </select>
           </div>
 
           {/* Start Date */}
@@ -184,11 +212,7 @@ const AddChallenges = () => {
               required
             />
             {startDateError && (
-              <div>
-                <p className="text-sm mt-1  text-red-500 mb-1">
-                  {startDateError}
-                </p>
-              </div>
+              <p className="text-sm mt-1 text-red-500 mb-1">{startDateError}</p>
             )}
           </div>
 
@@ -203,11 +227,7 @@ const AddChallenges = () => {
               required
             />
             {endDateError && (
-              <div>
-                <p className="text-sm mt-1  text-red-500 mb-1">
-                  {endDateError}
-                </p>
-              </div>
+              <p className="text-sm mt-1 text-red-500 mb-1">{endDateError}</p>
             )}
           </div>
 

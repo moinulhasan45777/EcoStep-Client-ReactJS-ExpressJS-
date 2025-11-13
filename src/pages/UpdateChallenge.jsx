@@ -26,7 +26,7 @@ const UpdateChallenge = () => {
     const impactMetric = form.impactMetric.value;
     const startDate = form.startDate.value.toString().slice(0, 10);
     const endDate = form.endDate.value.toString().slice(0, 10);
-
+    const updatedAt = new Date().toISOString().slice(0, 10);
     const newChallenge = {
       title,
       category,
@@ -39,6 +39,7 @@ const UpdateChallenge = () => {
       startDate,
       endDate,
       imageUrl,
+      updatedAt,
     };
 
     if (
@@ -63,12 +64,11 @@ const UpdateChallenge = () => {
       body: JSON.stringify(newChallenge),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         toast.success("Challenge Updated!");
         setStartDateError("");
         setEndDateError("");
-        navigate("/my-activites");
+        navigate("/my-activities");
         setLoading(false);
       })
       .catch((error) => toast.error(error.message));

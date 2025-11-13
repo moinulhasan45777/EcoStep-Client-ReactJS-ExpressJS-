@@ -45,7 +45,7 @@ const Banner = ({ allChallenges }) => {
         ))}
       </Swiper>
       <LiveStatistics allChallenges={allChallenges}></LiveStatistics>
-      <div className="h-0.5 bg-base-100 w-7/10 mx-auto mb-20"></div>
+      <div className="h-0.5 bg-base-100 w-9/10 md:w-8/10 lg:w-7/10 mx-auto mb-20"></div>
     </header>
   );
 };

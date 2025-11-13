@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 const Tip = ({ tip }) => {
   const [upvoteCount, setUpvoteCount] = useState(tip.upvotes);
@@ -16,7 +17,8 @@ const Tip = ({ tip }) => {
       .then((res) => res.json())
       .then(() => {
         setUpvoteCount(upvoteCount + 1);
-      });
+      })
+      .catch((error) => toast.error(error.message));
   };
   return (
     <div className=" w-full bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200 p-5 flex flex-col justify-between">

@@ -103,10 +103,6 @@ const Register = () => {
       });
   };
 
-  if (loading) {
-    return <Loading></Loading>;
-  }
-
   if (user && !location.state) {
     return <Navigate to="/"></Navigate>;
   }
@@ -178,6 +174,7 @@ const Register = () => {
               </div>
               {error && <p className="text-xs text-red-400">{error}</p>}
               <button
+                disabled={loading}
                 type="submit"
                 className="btn btn-primary hover:bg-secondary border-none transition-all duration-300 ease-in-out mt-4 shadow-none"
               >

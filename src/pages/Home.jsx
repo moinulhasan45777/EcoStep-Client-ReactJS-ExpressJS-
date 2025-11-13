@@ -14,15 +14,15 @@ const Home = () => {
     <div>
       <Banner allChallenges={allChallenges}></Banner>
       <WhyGoGreen></WhyGoGreen>
-      <div className="h-0.5 bg-base-100 w-7/10 mx-auto mb-20"></div>
+      <div className="h-0.5 bg-base-100 w-9/10 md:w-8/10 lg:w-7/10 mx-auto mb-20"></div>
       <ActiveChallenges allChallenges={allChallenges}></ActiveChallenges>
-      <div className="h-0.5 bg-base-100 w-7/10 mx-auto mb-20"></div>
+      <div className="h-0.5 bg-base-100 w-9/10 md:w-8/10 lg:w-7/10 mx-auto mb-20"></div>
 
       <Tips></Tips>
-      <div className="h-0.5 bg-base-100 w-7/10 mx-auto mb-20"></div>
+      <div className="h-0.5 bg-base-100 w-9/10 md:w-8/10 lg:w-7/10 mx-auto mb-20"></div>
 
       <HowItWorks></HowItWorks>
-      <div className="h-0.5 bg-base-100 w-7/10 mx-auto mb-20"></div>
+      <div className="h-0.5 bg-base-100 w-9/10 md:w-8/10 lg:w-7/10 mx-auto mb-20"></div>
       <UpcomingEvents></UpcomingEvents>
     </div>
   );

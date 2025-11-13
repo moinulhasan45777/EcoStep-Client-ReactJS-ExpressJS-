@@ -2,7 +2,7 @@ import React from "react";
 
 const LiveStatistics = ({ allChallenges }) => {
   return (
-    <section className="w-7/10 my-20 mx-auto">
+    <section className="w-9/10 md:w-8/10 lg:w-7/10 my-20 mx-auto">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-4xl font-bold text-secondary mb-4">
           Live Statistics

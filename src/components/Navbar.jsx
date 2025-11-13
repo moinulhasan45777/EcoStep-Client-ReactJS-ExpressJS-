@@ -32,7 +32,7 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to="/my-activites"
+            to="/my-activities"
             className="relative group hover:text-primary transition-colors duration-300  pb-1"
             end
           >
@@ -60,7 +60,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar shadow-sm px-4 md:px-10 py-3">
-      <div className="navbar-start justify-between w-full md:justify-start md:w-[50%]">
+      <div className="navbar-start  w-full md:justify-start md:w-[50%]">
         <div className="dropdown z-999">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -109,8 +109,11 @@ const Navbar = () => {
         </ul>
       </div>
       {user ? (
-        <div className="navbar-end z-99 gap-2">
-          <div className="dropdown dropdown-end">
+        <div className="navbar-end z-99 gap-2 ">
+          <div
+            className="dropdown dropdown-end tooltip hover:tooltip-open tooltip-left"
+            data-tip={user.displayName}
+          >
             <img
               tabIndex={0}
               role="button"
@@ -136,7 +139,7 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
-                  to="/my-activites"
+                  to="/my-activities"
                   className="relative group transition-colors duration-300  pb-1 rounded-none"
                 >
                   My Activities

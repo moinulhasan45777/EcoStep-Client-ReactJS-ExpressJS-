@@ -2,7 +2,7 @@ import React from "react";
 
 const HowItWorks = () => {
   return (
-    <section className="w-7/10 mb-20 mx-auto">
+    <section className="w-9/10 md:w-8/10 lg:w-7/10 mb-20 mx-auto">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-4xl font-bold text-secondary mb-4">How It Works</h2>
         <p className="text-gray-600 max-w-2xl mx-auto mb-10">

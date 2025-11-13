@@ -45,7 +45,7 @@ const JoinedChallengePage = () => {
 
   if (loading) {
     return (
-      <div className="w-7/10 mx-auto flex justify-center">
+      <div className="w-9/10 md:w-8/10 lg:w-7/10 mx-auto flex justify-center">
         <span className="loading loading-spinner loading-xl"></span>
       </div>
     );

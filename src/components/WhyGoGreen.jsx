@@ -2,7 +2,7 @@ import React from "react";
 
 const WhyGoGreen = () => {
   return (
-    <section className="w-7/10 mb-20 mx-auto">
+    <section className="w-9/10 md:w-8/10 lg:w-7/10 mb-20 mx-auto">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         <div className="relative w-full h-80 md:h-104 rounded-2xl overflow-hidden shadow-sm">
           <img

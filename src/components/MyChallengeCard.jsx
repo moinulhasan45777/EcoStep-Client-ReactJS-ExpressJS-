@@ -41,7 +41,7 @@ const MyChallengeCard = ({ challenge, setMyChallenges }) => {
           <div className="flex gap-2">
             <button
               onClick={() =>
-                navigate(`/my-activites/challenges/update/${challenge._id}`, {
+                navigate(`/my-activities/challenges/update/${challenge._id}`, {
                   state: challenge,
                 })
               }

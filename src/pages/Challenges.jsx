@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ChallengeCard from "../components/ChallengeCard";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const Challenges = () => {
   const [allChallenges, setAllChallenges] = useState([]);
@@ -24,6 +25,9 @@ const Challenges = () => {
         .then((data) => {
           setAllChallenges(data);
           setLoading(false);
+        })
+        .catch((error) => {
+          toast.error(error.message);
         });
     };
 
@@ -38,11 +42,10 @@ const Challenges = () => {
     setStart(form.startDate.value.toString().slice(0, 10));
     setEnd(form.endDate.value.toString().slice(0, 10));
     setParticipantNumber(parseInt(form.participants.value));
-    console.log(participantNumber);
   };
 
   return (
-    <section className="w-7/10 min-h-[calc(100vh-72.594px)] mx-auto py-16">
+    <section className="w-9/10 md:w-8/10 lg:w-7/10 min-h-[calc(100vh-72.594px)] mx-auto py-16">
       <div className="mx-auto px-6">
         {/* Page Title */}
         <h1 className="text-4xl font-bold text-secondary mb-10 text-center">
@@ -117,15 +120,16 @@ const Challenges = () => {
           </div>
 
           <button
+            disabled={loading}
             type="submit"
-            className="bg-primary hover:bg-secondary cursor-pointer text-white font-medium px-6 py-2 rounded-lg transition-all duration-300 sm:mt-0"
+            className="bg-primary disabled:bg-secondary disabled:cursor-auto hover:bg-secondary cursor-pointer text-white font-medium px-6 py-2 rounded-lg transition-all duration-300 sm:mt-0"
           >
             Search Challenges
           </button>
         </form>
 
         {loading ? (
-          <div className="w-7/10 mx-auto flex justify-center">
+          <div className="w-9/10 md:w-8/10 lg:w-7/10 mx-auto flex justify-center">
             <span className="loading loading-spinner loading-xl"></span>
           </div>
         ) : (

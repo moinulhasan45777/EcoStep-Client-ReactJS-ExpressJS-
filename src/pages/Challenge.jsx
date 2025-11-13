@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { toast } from "react-toastify";
 
 const Challenge = () => {
   const navigate = useNavigate();
@@ -14,7 +15,8 @@ const Challenge = () => {
         .then((data) => {
           setChallenge(data);
           setLoading(false);
-        });
+        })
+        .catch((error) => toast.error(error.message));
     };
 
     getChallenge();
@@ -50,7 +52,7 @@ const Challenge = () => {
       </div>
 
       {/* Main Content */}
-      <div className="lg:max-w-7/10 mx-auto px-6 py-12">
+      <div className="max-w-9/10 md:max-w-7/10 mx-auto px-6 py-12">
         <div className="bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-8 mb-10 border border-gray-100">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">
             About the Challenge

@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const MyJoinedChallengeCard = ({ challenge, userChallenges }) => {
   const { user } = useAuth();
@@ -33,7 +34,7 @@ const MyJoinedChallengeCard = ({ challenge, userChallenges }) => {
       status,
       progress,
     };
-    console.log(userChallenge._id);
+
     await fetch(`http://localhost:3000/user-challenges/${userChallenge._id}`, {
       method: "PATCH",
       headers: {
@@ -42,7 +43,8 @@ const MyJoinedChallengeCard = ({ challenge, userChallenges }) => {
       body: JSON.stringify(updatedUserChallenge),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then()
+      .catch((error) => toast.error(error.message));
     navigate(`/my-activities/${challenge._id}`);
   };
   return (

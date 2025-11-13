@@ -14,6 +14,7 @@ const Navbar = () => {
           <NavLink
             to="/"
             className="relative group hover:text-primary transition-colors duration-300 pb-1"
+            end
           >
             Home
             <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
@@ -23,6 +24,7 @@ const Navbar = () => {
           <NavLink
             to="/challenges"
             className="relative group hover:text-primary transition-colors duration-300  pb-1"
+            end
           >
             Challenges
             <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
@@ -32,6 +34,7 @@ const Navbar = () => {
           <NavLink
             to="/my-activites"
             className="relative group hover:text-primary transition-colors duration-300  pb-1"
+            end
           >
             My Activites
             <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>

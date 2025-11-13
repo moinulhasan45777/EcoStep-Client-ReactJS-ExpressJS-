@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ChallengeCard from "../components/ChallengeCard";
+import { useNavigate } from "react-router";
 
 const Challenges = () => {
   const [allChallenges, setAllChallenges] = useState([]);
@@ -8,6 +9,8 @@ const Challenges = () => {
   const [end, setEnd] = useState("");
   const [participantNumber, setParticipantNumber] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -37,8 +40,6 @@ const Challenges = () => {
     setParticipantNumber(parseInt(form.participants.value));
   };
 
-  console.log(allChallenges);
-
   return (
     <section className="w-7/10 min-h-[calc(100vh-72.594px)] mx-auto py-16">
       <div className="mx-auto px-6">
@@ -46,6 +47,16 @@ const Challenges = () => {
         <h1 className="text-4xl font-bold text-secondary mb-10 text-center">
           Explore Challenges
         </h1>
+
+        {/* Add New Challenge Button */}
+        <div className="flex justify-center mb-8">
+          <button
+            className="bg-primary hover:bg-secondary text-white font-medium px-6 py-3 rounded-lg shadow-md transition duration-300 cursor-pointer"
+            onClick={() => navigate("/challenges/add")}
+          >
+            ➕ Create New Challenge
+          </button>
+        </div>
 
         {/* Filters */}
         <form

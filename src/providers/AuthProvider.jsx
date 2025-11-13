@@ -16,8 +16,7 @@ const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  console.log(user);
-  console.log(loading);
+
   //   Registration
   const handleEmailRegistration = (email, pass) => {
     setLoading(true);

@@ -1,6 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 const ChallengeCard = ({ challenge }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/challenges/${challenge._id}`);
+  };
   return (
     <div className=" bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 flex flex-col">
       {/* Image Section */}
@@ -25,12 +30,21 @@ const ChallengeCard = ({ challenge }) => {
           {challenge.description}
         </p>
 
+        {/* Duration & Participants */}
+        <div className="flex text-sm text-gray-500 gap-4 mb-2">
+          <span>🕒 Duration: {challenge.duration} days</span>
+          <span>👥 Participants: {challenge.participants}</span>
+        </div>
+
         {/* Impact Metric + Button */}
         <div className="mt-auto flex items-center justify-between border-t border-gray-100 pt-4">
-          <span className="text-sm font-medium text-green-600">
-            🌱 Impact: {challenge.impactMetric}
+          <span className="text-sm font-medium flex mr-2 gap-1">
+            <span>🌱</span> <span>Impact: {challenge.impactMetric}</span>
           </span>
-          <button className="text-sm px-3 py-1.5 rounded-lg bg-primary text-white hover:bg-secondary transition cursor-pointer">
+          <button
+            onClick={handleClick}
+            className="text-sm px-3 py-1.5 rounded-lg bg-primary text-white hover:bg-secondary transition cursor-pointer w-25"
+          >
             Join Now
           </button>
         </div>

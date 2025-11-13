@@ -115,12 +115,11 @@ const Challenges = () => {
             />
           </div>
 
-          {/* Apply Button */}
           <button
             type="submit"
             className="bg-primary hover:bg-secondary cursor-pointer text-white font-medium px-6 py-2 rounded-lg transition-all duration-300 sm:mt-0"
           >
-            Apply Filters
+            Search Challenges
           </button>
         </form>
 

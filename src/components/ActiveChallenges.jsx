@@ -10,6 +10,7 @@ const ActiveChallenges = ({ allChallenges }) => {
       <div className="grid grid-cols-3 justify-center w-7/10 mx-auto gap-6">
         {allChallenges
           .filter((challenge) => new Date() <= new Date(challenge.endDate))
+          .slice(0, 6)
           .map((challenge) => {
             return (
               <ChallengeCard

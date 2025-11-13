@@ -1,10 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 
-const PrimaryButton = ({ st }) => {
+const PrimaryButton = ({ challenge, st }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/challenges/${challenge._id}`);
+  };
   return (
     <StyledWrapper>
-      <button className="cssbuttons-io">
+      <button onClick={() => handleClick()} className="cssbuttons-io">
         <span>{st}</span>
       </button>
     </StyledWrapper>

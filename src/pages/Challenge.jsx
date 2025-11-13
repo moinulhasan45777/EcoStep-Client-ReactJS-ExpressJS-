@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 const Challenge = () => {
+  const navigate = useNavigate();
   const id = useParams();
   const [loading, setLoading] = useState(true);
   const [challenge, setChallenge] = useState(null);
@@ -18,6 +19,10 @@ const Challenge = () => {
 
     getChallenge();
   }, [id.id]);
+
+  const handleClick = () => {
+    navigate(`/challenges/join/${challenge._id}`, { state: challenge });
+  };
 
   if (loading) {
     return <LoadingSpinner></LoadingSpinner>;
@@ -105,7 +110,10 @@ const Challenge = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-primary hover:bg-secondary cursor-pointer text-white font-semibold px-8 py-3 rounded-xl transition-all shadow-sm">
+            <button
+              onClick={handleClick}
+              className="bg-primary hover:bg-secondary cursor-pointer text-white font-semibold px-8 py-3 rounded-xl transition-all shadow-sm"
+            >
               🌱 Join Challenge
             </button>
             <button className="border border-gray-300 hover:bg-gray-100 text-gray-800 font-semibold px-8 py-3 rounded-xl transition-all cursor-pointer">

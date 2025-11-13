@@ -97,7 +97,7 @@ const Navbar = () => {
         </ul>
       </div>
       {user ? (
-        <div className="navbar-end gap-2">
+        <div className="navbar-end z-99 gap-2">
           <div className="dropdown dropdown-end">
             <img
               tabIndex={0}

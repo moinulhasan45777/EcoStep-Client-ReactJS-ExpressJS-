@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import useAxios from "../hooks/useAxios";
+import { toast } from "react-toastify";
 
 const AddChallenges = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [startDateError, setStartDateError] = useState("");
+  const [endDateError, setEndDateError] = useState("");
   const axiosInstance = useAxios();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,9 +37,25 @@ const AddChallenges = () => {
       imageUrl,
     };
 
+    if (
+      new Date(startDate).setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0)
+    ) {
+      setStartDateError("Please select a valid Start Date!");
+      return;
+    } else if (
+      new Date(endDate).setHours(0, 0, 0, 0) <
+      new Date(startDate).setHours(0, 0, 0, 0)
+    ) {
+      setEndDateError("Please select a valid End Date!");
+      return;
+    }
+
     setLoading(true);
-    await axiosInstance.post("/challenges", newChallenge).then((data) => {
-      console.log(data.data);
+    await axiosInstance.post("/challenges", newChallenge).then(() => {
+      toast.success("Challenge Created!");
+      form.reset();
+      setStartDateError("");
+      setEndDateError("");
       setLoading(false);
     });
   };
@@ -60,7 +79,7 @@ const AddChallenges = () => {
               type="text"
               name="title"
               placeholder="Enter challenge title"
-              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
           </div>
@@ -70,7 +89,7 @@ const AddChallenges = () => {
             <label className="text-sm text-gray-600 mb-1 block">Category</label>
             <select
               name="category"
-              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
             >
               <option value="">Select Category</option>
@@ -93,7 +112,7 @@ const AddChallenges = () => {
               type="number"
               name="duration"
               placeholder="e.g. 21"
-              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
           </div>
@@ -105,7 +124,7 @@ const AddChallenges = () => {
               type="text"
               name="target"
               placeholder="e.g. Reduce daily water waste"
-              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
           </div>
@@ -119,7 +138,7 @@ const AddChallenges = () => {
               name="description"
               placeholder="Enter challenge details..."
               rows="4"
-              className="border border-gray-300 rounded-lg px-4 py-2 w-full resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="border border-gray-300 rounded-lg px-4 py-2 w-full resize-none focus:outline-none focus:ring-2 focus:ring-primary"
               required
             ></textarea>
           </div>
@@ -133,7 +152,7 @@ const AddChallenges = () => {
               type="url"
               name="imageUrl"
               placeholder="https://example.com/image.jpg"
-              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
           </div>
@@ -147,7 +166,7 @@ const AddChallenges = () => {
               type="text"
               name="impactMetric"
               placeholder="e.g. liters saved"
-              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
           </div>
@@ -158,22 +177,38 @@ const AddChallenges = () => {
               Start Date
             </label>
             <input
+              onFocus={() => setStartDateError("")}
               type="date"
               name="startDate"
-              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
+            {startDateError && (
+              <div>
+                <p className="text-sm mt-1  text-red-500 mb-1">
+                  {startDateError}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* End Date */}
           <div>
             <label className="text-sm text-gray-600 mb-1 block">End Date</label>
             <input
+              onFocus={() => setEndDateError("")}
               type="date"
               name="endDate"
-              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
+            {endDateError && (
+              <div>
+                <p className="text-sm mt-1  text-red-500 mb-1">
+                  {endDateError}
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Submit */}
@@ -182,7 +217,9 @@ const AddChallenges = () => {
               type="submit"
               disabled={loading}
               className={`${
-                loading ? "bg-green-400" : "bg-green-600 hover:bg-green-700"
+                loading
+                  ? "bg-secondary cursor-auto"
+                  : "bg-primary hover:bg-secondary cursor-pointer"
               } text-white font-semibold px-8 py-3 rounded-lg shadow-md transition`}
             >
               {loading ? "Creating..." : "Create Challenge"}

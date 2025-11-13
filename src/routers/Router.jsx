@@ -12,6 +12,7 @@ import AddChallenges from "../pages/AddChallenges.jsx";
 import ForgotPassword from "../pages/ForgotPassword.jsx";
 import Challenge from "../pages/Challenge.jsx";
 import Error from "../pages/Error.jsx";
+import JoinChallenge from "../pages/JoinChallenge.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -37,6 +38,14 @@ export const Router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddChallenges></AddChallenges>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/challenges/join/:id",
+        element: (
+          <PrivateRoute>
+            <JoinChallenge></JoinChallenge>
           </PrivateRoute>
         ),
       },

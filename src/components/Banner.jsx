@@ -10,6 +10,7 @@ import { Zoom, Navigation, Pagination } from "swiper/modules";
 // Import Swiper styles
 import "swiper/css";
 import PrimaryButton from "../components/PrimaryButton";
+
 const Banner = ({ allChallenges }) => {
   return (
     <header className="mb-20">
@@ -34,7 +35,10 @@ const Banner = ({ allChallenges }) => {
                 <h1 className="text-[4rem] text-primary font-semibold text-center leading-20">
                   {challenge.title}
                 </h1>
-                <PrimaryButton st="View Challenge"></PrimaryButton>
+                <PrimaryButton
+                  challenge={challenge}
+                  st="View Challenge"
+                ></PrimaryButton>
               </div>
             </div>
           </SwiperSlide>

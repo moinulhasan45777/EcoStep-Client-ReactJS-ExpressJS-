@@ -4,12 +4,12 @@ import "swiper/css/zoom";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-// import required modules
+
 import { Zoom, Navigation, Pagination } from "swiper/modules";
 
-// Import Swiper styles
 import "swiper/css";
 import PrimaryButton from "../components/PrimaryButton";
+import LiveStatistics from "./LiveStatistics";
 
 const Banner = ({ allChallenges }) => {
   return (
@@ -32,7 +32,7 @@ const Banner = ({ allChallenges }) => {
               className="bg-cover bg-center w-full min-h-[calc(100vh-72.594px)] relative"
             >
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center flex-col gap-5">
-                <h1 className="text-[4rem] text-primary font-semibold text-center leading-20">
+                <h1 className="text-[3rem] md:text-[4rem] text-primary font-semibold text-center leading-16">
                   {challenge.title}
                 </h1>
                 <PrimaryButton
@@ -44,6 +44,8 @@ const Banner = ({ allChallenges }) => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <LiveStatistics allChallenges={allChallenges}></LiveStatistics>
+      <div className="h-0.5 bg-base-100 w-7/10 mx-auto mb-20"></div>
     </header>
   );
 };

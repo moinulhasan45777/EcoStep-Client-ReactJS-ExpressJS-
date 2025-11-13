@@ -59,9 +59,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar shadow-sm px-10 py-3">
-      <div className="navbar-start">
-        <div className="dropdown">
+    <nav className="navbar shadow-sm px-4 md:px-10 py-3">
+      <div className="navbar-start justify-between w-full md:justify-start md:w-[50%]">
+        <div className="dropdown z-999">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -84,12 +84,24 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             {links()}
+            {!user && (
+              <div className="md:hidden">
+                <li>
+                  <NavLink to="/register">Register</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/login" className="font-semibold">
+                    Login
+                  </NavLink>
+                </li>
+              </div>
+            )}
           </ul>
         </div>
-        <a className="text-2xl font-bold flex gap-2 items-center">
+        <Link className="text-2xl font-bold flex gap-2 items-center">
           <img src={logo} alt="Logo" className="w-10 h-10" />
           <p className="text-primary">EcoStep</p>
-        </a>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu-horizontal gap-10 px-1 font-bold text-lg">
@@ -141,14 +153,16 @@ const Navbar = () => {
           </div>
         </div>
       ) : (
-        <div className="navbar-end gap-2">
-          <Link to="/register">
-            <PrimaryButton st={"Register"}></PrimaryButton>
-          </Link>
-          <Link to="/login">
-            <PrimaryButton st={"Login"}></PrimaryButton>
-          </Link>
-        </div>
+        !user && (
+          <div className="navbar-end gap-2 hidden md:flex">
+            <Link to="/register">
+              <PrimaryButton st={"Register"}></PrimaryButton>
+            </Link>
+            <Link to="/login">
+              <PrimaryButton st={"Login"}></PrimaryButton>
+            </Link>
+          </div>
+        )
       )}
     </nav>
   );

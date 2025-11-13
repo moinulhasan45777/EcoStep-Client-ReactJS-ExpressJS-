@@ -55,6 +55,17 @@ const Footer = () => {
           Copyright © {new Date().getFullYear()} - All right reserved by{" "}
           <b>EcoStep LTD</b>
         </p>
+        <p className="mt-2 opacity-15">
+          We’re committed to making our platform accessible to everyone and
+          protecting your personal data.<br></br> Learn more in our{" "}
+          <Link className="underline text-white hover:opacity-50">
+            Accessibility Statement
+          </Link>{" "}
+          and{" "}
+          <Link className="underline text-white hover:opacity-50">
+            Privacy Policy
+          </Link>
+        </p>
       </aside>
     </footer>
   );

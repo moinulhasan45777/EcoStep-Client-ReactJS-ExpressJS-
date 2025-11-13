@@ -38,6 +38,7 @@ const Challenges = () => {
     setStart(form.startDate.value.toString().slice(0, 10));
     setEnd(form.endDate.value.toString().slice(0, 10));
     setParticipantNumber(parseInt(form.participants.value));
+    console.log(participantNumber);
   };
 
   return (

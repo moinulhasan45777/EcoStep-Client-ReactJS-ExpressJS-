@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 const Tip = ({ tip }) => {
   const [upvoteCount, setUpvoteCount] = useState(tip.upvotes);
-  const handleUpvote = () => {
+  const handleUpvote = async () => {
     const updatedTip = {
       upvotes: tip.upvotes + 1,
     };
-    fetch(`http://localhost:3000/tips/${tip._id}`, {
+    await fetch(`http://localhost:3000/tips/${tip._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

@@ -5,7 +5,6 @@ import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 
 const JoinChallenge = () => {
-  const [userChallenges, setUserChallenges] = useState([]);
   const [joined, setJoined] = useState(false);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
@@ -51,11 +50,22 @@ const JoinChallenge = () => {
 
     setLoading(true);
 
+    const newChallenge = { participants: challenge.participants + 1 };
     await axiosInstance
       .post(`/challenges/join/${challenge._id}`, userChallenge)
-      .then(() => {
-        toast.success("Challenge Joined!");
-        setJoined(true);
+      .then(async () => {
+        await fetch(`http://localhost:3000/challenges/${challenge._id}`, {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newChallenge),
+        })
+          .then((res) => res.json())
+          .then(() => {
+            toast.success("Challenge Joined!");
+            setJoined(true);
+          });
       })
       .catch((error) => {
         toast.error(error.message);

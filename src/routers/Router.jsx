@@ -13,6 +13,7 @@ import ForgotPassword from "../pages/ForgotPassword.jsx";
 import Challenge from "../pages/Challenge.jsx";
 import Error from "../pages/Error.jsx";
 import JoinChallenge from "../pages/JoinChallenge.jsx";
+import UpdateChallenge from "../pages/UpdateChallenge.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -50,8 +51,22 @@ export const Router = createBrowserRouter([
         ),
       },
       {
+        path: "/my-activites/challenges/update/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateChallenge></UpdateChallenge>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/my-activites",
-        element: <MyActivites></MyActivites>,
+        element: (
+          <PrivateRoute>
+            <MyActivites></MyActivites>
+          </PrivateRoute>
+        ),
+        loader: () =>
+          fetch("http://localhost:3000/challenges").then((res) => res.json()),
       },
       {
         path: "/login",

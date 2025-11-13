@@ -65,12 +65,13 @@ const UpdateChallenge = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        toast.success("Challenge Created!");
+        toast.success("Challenge Updated!");
         setStartDateError("");
         setEndDateError("");
         navigate("/my-activites");
         setLoading(false);
-      });
+      })
+      .catch((error) => toast.error(error.message));
   };
   return (
     <section className="w-full min-h-screen bg-gray-50 py-16">

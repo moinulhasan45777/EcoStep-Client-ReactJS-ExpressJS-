@@ -15,20 +15,24 @@ const JoinChallenge = () => {
   const status = useRef("");
   useEffect(() => {
     setLoading(true);
+
     const getUserChallenges = async () => {
       await fetch("http://localhost:3000/user-challenges")
         .then((res) => res.json())
-        .then((data) => {
-          data.find((d) => d.challengeId == challenge._id && setJoined(true));
-          setLoading(false);
-        })
-        .catch((error) => {
-          toast.error(error.message);
-        });
+        .then((data) =>
+          data.some(
+            (uc) =>
+              uc.userId == user.email &&
+              uc.challengeId == challenge._id &&
+              setJoined(true)
+          )
+        )
+        .catch((error) => toast.error(error.message))
+        .finally(() => setLoading(false));
     };
 
     getUserChallenges();
-  }, [challenge._id]);
+  }, [challenge._id, user.email]);
   const handleYes = async () => {
     if (new Date(challenge.startDate) > new Date()) {
       status.current = "Not Started";
@@ -65,10 +69,12 @@ const JoinChallenge = () => {
           .then(() => {
             toast.success("Challenge Joined!");
             setJoined(true);
+            setLoading(false);
           });
       })
       .catch((error) => {
         toast.error(error.message);
+        setLoading(false);
       })
       .finally(() => setLoading(false));
   };

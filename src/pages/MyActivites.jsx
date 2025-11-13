@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router";
 import useAuth from "../hooks/useAuth";
 import MyChallenges from "../components/MyChallenges";
 import { toast } from "react-toastify";
+import MyJoinedChallenges from "../components/MyJoinedChallenges";
 
 const MyActivites = () => {
   const { user } = useAuth();
@@ -40,6 +41,7 @@ const MyActivites = () => {
             email={user.email}
             setMyChallenges={setMyChallenges}
           ></MyChallenges>
+          <MyJoinedChallenges></MyJoinedChallenges>
         </div>
       )}
     </div>

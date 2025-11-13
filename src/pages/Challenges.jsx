@@ -19,7 +19,7 @@ const Challenges = () => {
     setLoading(true);
     const search = async () => {
       await fetch(
-        `http://localhost:3000/challenges?category=${encodeURIComponent(
+        `https://eco-step-api-server.vercel.app/challenges?category=${encodeURIComponent(
           category
         )}&startDate=${start}&endDate=${end}&participant=${participantNumber}`
       )

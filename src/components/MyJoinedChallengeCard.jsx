@@ -35,13 +35,16 @@ const MyJoinedChallengeCard = ({ challenge, userChallenges }) => {
       progress,
     };
 
-    await fetch(`http://localhost:3000/user-challenges/${userChallenge._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updatedUserChallenge),
-    })
+    await fetch(
+      `https://eco-step-api-server.vercel.app/user-challenges/${userChallenge._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updatedUserChallenge),
+      }
+    )
       .then((res) => res.json())
       .then()
       .catch((error) => toast.error(error.message));

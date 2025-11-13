@@ -12,6 +12,7 @@ const AddChallenges = () => {
   const [targetError, setTargetError] = useState("");
   const [durationError, setDurationError] = useState("");
   const [endDateError, setEndDateError] = useState("");
+  const [misMatch, setMisMatch] = useState("");
   const axiosInstance = useAxios();
 
   const handleSubmit = async (e) => {
@@ -64,6 +65,14 @@ const AddChallenges = () => {
       new Date(startDate).setHours(0, 0, 0, 0)
     ) {
       setEndDateError("Please select a valid End Date!");
+      return;
+    }
+
+    if (
+      (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24) !=
+      duration + 1
+    ) {
+      setMisMatch("Duration and Date Mismatch!");
       return;
     }
 
@@ -129,13 +138,19 @@ const AddChallenges = () => {
             <input
               type="number"
               name="duration"
-              onFocus={() => setDurationError("")}
+              onFocus={() => {
+                setDurationError("");
+                setMisMatch("");
+              }}
               placeholder="e.g. 21"
               className="border border-gray-300 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-primary"
               required
             />
             {durationError && (
               <p className="text-sm mt-1 text-red-500 mb-1">{durationError}</p>
+            )}
+            {misMatch && (
+              <p className="text-sm mt-1 text-red-500 mb-1">{misMatch}</p>
             )}
           </div>
 

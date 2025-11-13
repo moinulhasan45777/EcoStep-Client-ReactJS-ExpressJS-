@@ -7,7 +7,7 @@ const Tip = ({ tip }) => {
     const updatedTip = {
       upvotes: tip.upvotes + 1,
     };
-    await fetch(`http://localhost:3000/tips/${tip._id}`, {
+    await fetch(`https://eco-step-api-server.vercel.app/tips/${tip._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

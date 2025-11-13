@@ -12,7 +12,7 @@ const Challenge = () => {
   const [challenge, setChallenge] = useState(null);
   useEffect(() => {
     const getChallenge = async () => {
-      await fetch(`http://localhost:3000/challenges/${id.id}`)
+      await fetch(`https://eco-step-api-server.vercel.app/challenges/${id.id}`)
         .then((res) => res.json())
         .then((data) => {
           setChallenge(data);

@@ -58,13 +58,16 @@ const UpdateChallenge = () => {
     }
 
     setLoading(true);
-    await fetch(`http://localhost:3000/challenges/update/${challenge._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newChallenge),
-    })
+    await fetch(
+      `https://eco-step-api-server.vercel.app/challenges/update/${challenge._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newChallenge),
+      }
+    )
       .then((res) => res.json())
       .then(() => {
         toast.success("Challenge Updated!");

@@ -16,7 +16,7 @@ const MyActivites = () => {
 
   const setMyChallenges = async (id) => {
     setLoading(true);
-    await fetch(`http://localhost:3000/challenges/${id}`, {
+    await fetch(`https://eco-step-api-server.vercel.app/challenges/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

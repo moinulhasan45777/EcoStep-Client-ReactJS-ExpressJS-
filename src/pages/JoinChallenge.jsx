@@ -24,7 +24,7 @@ const JoinChallenge = () => {
 
     if (location.state) {
       setChallenge(location.state);
-      fetch("http://localhost:3000/user-challenges")
+      fetch("https://eco-step-api-server.vercel.app/user-challenges")
         .then((res) => res.json())
         .then((data) => {
           const hasJoined = data.some(
@@ -39,7 +39,7 @@ const JoinChallenge = () => {
           setLoading(false);
         });
     } else {
-      fetch(`http://localhost:3000/challenges/${id}`)
+      fetch(`https://eco-step-api-server.vercel.app/challenges/${id}`)
         .then((res) => res.json())
         .then(async (data) => {
           if (!data) {
@@ -49,7 +49,7 @@ const JoinChallenge = () => {
           }
           setChallenge(data);
 
-          await fetch("http://localhost:3000/user-challenges")
+          await fetch("https://eco-step-api-server.vercel.app/user-challenges")
             .then((res) => res.json())
             .then((all) => {
               const hasJoined = all.some(
@@ -95,11 +95,14 @@ const JoinChallenge = () => {
     axiosInstance
       .post(`/challenges/join/${challenge._id}`, userChallenge)
       .then(async () => {
-        await fetch(`http://localhost:3000/challenges/${challenge._id}`, {
-          method: "PATCH",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(updatedChallenge),
-        })
+        await fetch(
+          `https://eco-step-api-server.vercel.app/challenges/${challenge._id}`,
+          {
+            method: "PATCH",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(updatedChallenge),
+          }
+        )
           .then((res) => res.json())
           .then(() => {
             toast.success("Challenge Joined!");

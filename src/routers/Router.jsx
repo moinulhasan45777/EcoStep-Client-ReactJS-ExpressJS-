@@ -29,7 +29,9 @@ export const Router = createBrowserRouter([
         element: <Home></Home>,
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
         loader: () =>
-          fetch("http://localhost:3000/challenges").then((res) => res.json()),
+          fetch("https://eco-step-api-server.vercel.app/challenges").then(
+            (res) => res.json()
+          ),
       },
       {
         path: "/challenges",
@@ -71,7 +73,9 @@ export const Router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: () =>
-          fetch("http://localhost:3000/challenges").then((res) => res.json()),
+          fetch("https://eco-step-api-server.vercel.app/challenges").then(
+            (res) => res.json()
+          ),
         hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
       },
       {

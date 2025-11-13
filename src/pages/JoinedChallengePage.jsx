@@ -16,11 +16,11 @@ const JoinedChallengePage = () => {
   useEffect(() => {
     setLoading(true);
     const getChallenge = async () => {
-      await fetch(`http://localhost:3000/challenges/${id.id}`)
+      await fetch(`https://eco-step-api-server.vercel.app/challenges/${id.id}`)
         .then((res) => res.json())
         .then(async (data) => {
           setChallenge(data);
-          await fetch("http://localhost:3000/user-challenges")
+          await fetch("https://eco-step-api-server.vercel.app/user-challenges")
             .then((res) => res.json())
             .then((all) => {
               setUserChallenges(all);

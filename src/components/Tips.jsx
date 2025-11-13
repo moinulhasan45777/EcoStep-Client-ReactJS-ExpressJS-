@@ -10,7 +10,7 @@ const Tips = () => {
     setLoading(true);
     const fetchTips = async () => {
       try {
-        const res = await fetch("http://localhost:3000/tips");
+        const res = await fetch("https://eco-step-api-server.vercel.app/tips");
         const data = await res.json();
         setLoading(false);
         setAllTips(data);

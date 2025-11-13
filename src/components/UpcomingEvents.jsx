@@ -7,7 +7,7 @@ const UpcomingEvents = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      await fetch("http://localhost:3000/events")
+      await fetch("https://eco-step-api-server.vercel.app/events")
         .then((res) => res.json())
         .then((data) => setUpcomingEvents([...data]))
         .catch((error) => toast.error(error.message));

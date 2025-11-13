@@ -11,13 +11,13 @@ const MyJoinedChallenges = () => {
   useEffect(() => {
     setLoading(true);
     const getUserChallenges = async () => {
-      await fetch("http://localhost:3000/user-challenges")
+      await fetch("https://eco-step-api-server.vercel.app/user-challenges")
         .then((res) => res.json())
         .then(async (userChallenge) => {
           setUserChallenges(
             userChallenge.filter((uc) => uc.userId == user.email)
           );
-          await fetch("http://localhost:3000/challenges")
+          await fetch("https://eco-step-api-server.vercel.app/challenges")
             .then((res) => res.json())
             .then((challengeData) => {
               const joinedChallengesIds = userChallenge

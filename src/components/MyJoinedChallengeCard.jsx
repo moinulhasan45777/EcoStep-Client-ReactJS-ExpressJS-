@@ -1,10 +1,49 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import useAuth from "../hooks/useAuth";
 
 const MyJoinedChallengeCard = ({ challenge, userChallenges }) => {
+  const { user } = useAuth();
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate();
+  const handleClick = async () => {
+    const userChallenge = userChallenges.find(
+      (ch) => ch.challengeId == challenge._id && ch.userId == user.email
+    );
+
+    const status =
+      new Date(challenge.startDate) <= new Date() &&
+      new Date(challenge.endDate) >= new Date()
+        ? "Ongoing"
+        : new Date(challenge.startDate) <= new Date()
+        ? "Finished"
+        : "Not Started";
+    const progress =
+      status === "Finished"
+        ? 100
+        : status === "Not Started"
+        ? 0
+        : Math.min(
+            100,
+            ((new Date() - new Date(challenge.startDate)) /
+              (new Date(challenge.endDate) - new Date(challenge.startDate))) *
+              100
+          );
+
+    const updatedUserChallenge = {
+      status,
+      progress,
+    };
+    console.log(userChallenge._id);
+    await fetch(`http://localhost:3000/user-challenges/${userChallenge._id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedUserChallenge),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+    navigate(`/my-activities/${challenge._id}`);
   };
   return (
     <div

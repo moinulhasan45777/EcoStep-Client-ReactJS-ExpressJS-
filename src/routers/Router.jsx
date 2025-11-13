@@ -14,6 +14,7 @@ import Challenge from "../pages/Challenge.jsx";
 import Error from "../pages/Error.jsx";
 import JoinChallenge from "../pages/JoinChallenge.jsx";
 import UpdateChallenge from "../pages/UpdateChallenge.jsx";
+import JoinedChallengePage from "../pages/JoinedChallengePage.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -67,6 +68,14 @@ export const Router = createBrowserRouter([
         ),
         loader: () =>
           fetch("http://localhost:3000/challenges").then((res) => res.json()),
+      },
+      {
+        path: "/my-activities/:id",
+        element: (
+          <PrivateRoute>
+            <JoinedChallengePage></JoinedChallengePage>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",

@@ -1,31 +1,54 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
-import LoadingSpinner from "../components/LoadingSpinner";
+import { useParams } from "react-router";
+import useAuth from "../hooks/useAuth";
+import { toast } from "react-toastify";
 
-const Challenge = () => {
-  const navigate = useNavigate();
-  const id = useParams();
-  const [loading, setLoading] = useState(true);
+const JoinedChallengePage = () => {
+  const { user } = useAuth();
   const [challenge, setChallenge] = useState(null);
+  const [userChallenges, setUserChallenges] = useState([]);
+  const [userChallenge, setUserChallenge] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const id = useParams();
+
   useEffect(() => {
+    setLoading(true);
     const getChallenge = async () => {
       await fetch(`http://localhost:3000/challenges/${id.id}`)
         .then((res) => res.json())
-        .then((data) => {
+        .then(async (data) => {
           setChallenge(data);
+          await fetch("http://localhost:3000/user-challenges")
+            .then((res) => res.json())
+            .then((all) => {
+              setUserChallenges(all);
+              setUserChallenge(
+                all.find(
+                  (uc) => uc.challengeId == data._id && uc.userId == user.email
+                )
+              );
+              setLoading(false);
+            })
+
+            .catch((error) => {
+              toast.error(error.message);
+              setLoading(false);
+            });
+        })
+        .catch((error) => {
+          toast.error(error.message);
           setLoading(false);
         });
     };
-
     getChallenge();
-  }, [id.id]);
-
-  const handleClick = () => {
-    navigate(`/challenges/join/${challenge._id}`, { state: challenge });
-  };
+  }, [id.id, user.email]);
 
   if (loading) {
-    return <LoadingSpinner></LoadingSpinner>;
+    return (
+      <div className="w-7/10 mx-auto flex justify-center">
+        <span className="loading loading-spinner loading-xl"></span>
+      </div>
+    );
   }
 
   return (
@@ -51,9 +74,10 @@ const Challenge = () => {
 
       {/* Main Content */}
       <div className="lg:max-w-7/10 mx-auto px-6 py-12">
+        {/* Description */}
         <div className="bg-white/90 backdrop-blur-md shadow-lg rounded-2xl p-8 mb-10 border border-gray-100">
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            About the Challenge
+            {challenge?.description}
           </h2>
           <p className="text-gray-700 leading-relaxed">
             {challenge?.description}
@@ -61,11 +85,11 @@ const Challenge = () => {
         </div>
 
         {/* Metrics Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           <div className="bg-linear-to-br from-green-100 to-green-50 p-6 rounded-xl shadow-sm text-center">
             <p className="text-gray-700 font-medium">Duration</p>
             <h3 className="text-2xl font-bold text-green-700 mt-1">
-              {challenge?.duration ? `${challenge?.duration} Days` : "N/A"}
+              {challenge?.duration} Days
             </h3>
           </div>
 
@@ -82,8 +106,23 @@ const Challenge = () => {
               {challenge?.impactMetric}
             </h3>
           </div>
+
+          {/*Progress Card */}
+          <div className="bg-linear-to-br from-pink-100 to-pink-50 p-6 rounded-xl shadow-sm text-center">
+            <p className="text-gray-700 font-medium">Progress</p>
+            <div className="mt-3 w-full bg-gray-200 rounded-full h-3">
+              <div
+                className="bg-pink-500 h-3 rounded-full transition-all duration-500"
+                style={{ width: `${parseInt(userChallenge?.progress)}%` }}
+              ></div>
+            </div>
+            <p className="text-sm font-semibold text-pink-700 mt-2">
+              {parseInt(userChallenge?.progress)}% Complete
+            </p>
+          </div>
         </div>
 
+        {/* Footer Info */}
         <div className="bg-white shadow-md rounded-2xl p-8 border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
           <div>
             <p className="text-gray-600 text-sm">
@@ -94,21 +133,13 @@ const Challenge = () => {
               <span className="font-semibold">End:</span> {challenge?.endDate}
             </p>
             <p className="text-gray-600 text-sm mt-2">
+              <span className="font-semibold">Status:</span>{" "}
+              {userChallenge?.status}
+            </p>
+            <p className="text-gray-600 text-sm mt-2">
               <span className="font-semibold">Created by:</span>{" "}
               {challenge?.createdBy}
             </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button
-              onClick={handleClick}
-              className="bg-primary hover:bg-secondary cursor-pointer text-white font-semibold px-8 py-3 rounded-xl transition-all shadow-sm"
-            >
-              🌱 Join Challenge
-            </button>
-            <button className="border border-gray-300 hover:bg-gray-100 text-gray-800 font-semibold px-8 py-3 rounded-xl transition-all cursor-pointer">
-              🔗 Share
-            </button>
           </div>
         </div>
       </div>
@@ -116,4 +147,4 @@ const Challenge = () => {
   );
 };
 
-export default Challenge;
+export default JoinedChallengePage;

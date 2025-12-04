@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const useTitle = (pageTitle) => {
   useEffect(() => {
-    const baseTitle = "ToyTopia";
+    const baseTitle = "EcoStep";
     document.title = pageTitle ? `${pageTitle} | ${baseTitle}` : baseTitle;
   }, [pageTitle]);
 };

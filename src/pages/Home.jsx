@@ -9,6 +9,7 @@ import WhyGoGreen from "../components/WhyGoGreen";
 import HowItWorks from "../components/HowItWorks";
 import useTitle from "../hooks/useTitle";
 import Newsletter from "../components/NewsLetter";
+import Testimonials from "../components/Testimonials";
 
 const Home = () => {
   useTitle("Home");
@@ -26,7 +27,10 @@ const Home = () => {
 
       <HowItWorks></HowItWorks>
       <div className="h-0.5 bg-base-100 w-9/10 md:w-8/10 lg:w-7/10 mx-auto mb-20"></div>
+      <Testimonials></Testimonials>
+      <div className="h-0.5 bg-base-100 w-9/10 md:w-8/10 lg:w-7/10 mx-auto mb-20"></div>
       <UpcomingEvents></UpcomingEvents>
+      <div className="h-0.5 bg-base-100 w-9/10 md:w-8/10 lg:w-7/10 mx-auto mb-20"></div>
       <Newsletter></Newsletter>
     </div>
   );

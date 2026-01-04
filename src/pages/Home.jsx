@@ -8,6 +8,7 @@ import UpcomingEvents from "../components/UpcomingEvents";
 import WhyGoGreen from "../components/WhyGoGreen";
 import HowItWorks from "../components/HowItWorks";
 import useTitle from "../hooks/useTitle";
+import Newsletter from "../components/NewsLetter";
 
 const Home = () => {
   useTitle("Home");
@@ -26,6 +27,7 @@ const Home = () => {
       <HowItWorks></HowItWorks>
       <div className="h-0.5 bg-base-100 w-9/10 md:w-8/10 lg:w-7/10 mx-auto mb-20"></div>
       <UpcomingEvents></UpcomingEvents>
+      <Newsletter></Newsletter>
     </div>
   );
 };

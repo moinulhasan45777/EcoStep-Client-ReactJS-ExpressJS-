@@ -55,27 +55,6 @@ const AddChallenges = () => {
       updatedAt,
     };
 
-    if (
-      new Date(startDate).setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0)
-    ) {
-      setStartDateError("Please select a valid Start Date!");
-      return;
-    } else if (
-      new Date(endDate).setHours(0, 0, 0, 0) <
-      new Date(startDate).setHours(0, 0, 0, 0)
-    ) {
-      setEndDateError("Please select a valid End Date!");
-      return;
-    }
-
-    if (
-      (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24) !=
-      duration + 1
-    ) {
-      setMisMatch("Duration and Date Mismatch!");
-      return;
-    }
-
     setLoading(true);
     await axiosInstance.post("/challenges", newChallenge).then(() => {
       toast.success("Challenge Created!");

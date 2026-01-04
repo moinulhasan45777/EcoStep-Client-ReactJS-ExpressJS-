@@ -32,11 +32,11 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to="/my-activities"
+            to="/about"
             className="relative group hover:text-primary transition-colors duration-300  pb-1"
             end
           >
-            My Activites
+            About
             <span className="absolute left-0 bottom-[-1.5px] h-[2px] w-0 bg-primary transition-all duration-300 ease-in-out group-hover:w-full"></span>
           </NavLink>
         </li>
@@ -59,7 +59,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar shadow-sm px-4 md:px-10 py-3">
+    <nav className="navbar shadow-sm px-4 md:px-10 py-3 sticky z-200">
       <div className="navbar-start  w-full md:justify-start md:w-[50%]">
         <div className="dropdown z-999">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

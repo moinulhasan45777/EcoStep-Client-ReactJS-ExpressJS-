@@ -13,7 +13,7 @@ import LiveStatistics from "./LiveStatistics";
 
 const Banner = ({ allChallenges }) => {
   return (
-    <header className="mb-20">
+    <header className="mb-20 z-0">
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
@@ -23,13 +23,13 @@ const Banner = ({ allChallenges }) => {
         }}
         navigation={true}
         modules={[Pagination, Navigation]}
-        className="mySwiper min-h-50 max-h-[calc(100vh-200px)]"
+        className="mySwiper min-h-50 max-h-[calc(100vh-200px)] "
       >
         {allChallenges.slice(0, 5).map((challenge) => (
           <SwiperSlide>
             <div
               style={{ backgroundImage: `url(${challenge.imageUrl})` }}
-              className="bg-cover bg-center w-full min-h-[calc(100vh-200px)] relative"
+              className="bg-cover bg-center w-full min-h-[calc(100vh-300px)] relative "
             >
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center flex-col gap-5">
                 <h1 className="text-[3rem] md:text-[4rem] text-primary font-semibold text-center leading-16 ">

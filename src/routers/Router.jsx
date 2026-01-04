@@ -18,6 +18,7 @@ import JoinedChallengePage from "../pages/JoinedChallengePage.jsx";
 import LoadingSpinner from "../components/LoadingSpinner.jsx";
 import RuntimeError from "../pages/RuntimeError.jsx";
 import About from "../pages/About.jsx";
+import Contact from "../pages/Contact.jsx";
 
 export const Router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const Router = createBrowserRouter([
       {
         path: "/about",
         element: <About></About>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
       },
       {
         path: "/challenges/:id",

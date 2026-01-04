@@ -10,12 +10,19 @@ const Footer = () => {
         <p className="text-primary">EcoStep</p>
       </a>
       <nav className="grid grid-flow-col gap-4">
-        <Link className="link link-hover hover:text-primary">About</Link>
-        <Link className="link link-hover hover:text-primary">Contact</Link>
+        <Link to="/about" className="link link-hover hover:text-primary">
+          About
+        </Link>
+        <Link to="/" className="link link-hover hover:text-primary">
+          Home
+        </Link>
       </nav>
       <nav>
         <div className="grid grid-flow-col gap-4">
-          <Link className="hover:text-primary cursor-pointer">
+          <Link
+            to="https://x.com/"
+            className="hover:text-primary cursor-pointer"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -33,7 +40,10 @@ const Footer = () => {
               ></path>{" "}
             </svg>
           </Link>
-          <Link className="hover:text-primary cursor-pointer">
+          <Link
+            to="https://www.youtube.com/"
+            className="hover:text-primary cursor-pointer"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -44,7 +54,10 @@ const Footer = () => {
               <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
             </svg>
           </Link>
-          <Link className="hover:text-primary cursor-pointer">
+          <Link
+            to="https://www.facebook.com/"
+            className="hover:text-primary cursor-pointer"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -64,14 +77,7 @@ const Footer = () => {
         </p>
         <p className="mt-2 opacity-15">
           We’re committed to making our platform accessible to everyone and
-          protecting your personal data.<br></br> Learn more in our{" "}
-          <Link className="underline text-white hover:opacity-50">
-            Accessibility Statement
-          </Link>{" "}
-          and{" "}
-          <Link className="underline text-white hover:opacity-50">
-            Privacy Policy
-          </Link>
+          protecting your personal data.
         </p>
       </aside>
     </footer>
